@@ -1,0 +1,16 @@
+<div class="todo-container">
+  <h1>Lista de Tarefas</h1>
+
+  <input [(ngModel)]="newTask" placeholder="Nova tarefa" />
+  <button (click)="addTask()">Adicionar</button>
+
+  <ul>
+    @for (task of tasks; track $index) {
+      <li>
+        <input type="checkbox" [(ngModel)]="task.completed" />
+        <span [class.completed]="task.completed">{{ task.title }}</span>
+        <button (click)="removeTask(task)">Remover</button>
+      </li>
+    }
+  </ul>
+</div>
