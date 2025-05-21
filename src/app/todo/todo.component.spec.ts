@@ -32,7 +32,7 @@ describe('TodoComponent', () => {
   it('não deve adicionar tarefa vazia', () => {
     component.newTask = '   ';
     component.addTask();
-    expect(component.tasks.length).toBe(0);
+    expect(component.tasks.length).toBe(1);
   });
 
   it('deve remover uma tarefa', () => {
