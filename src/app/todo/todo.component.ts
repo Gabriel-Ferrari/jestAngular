@@ -12,8 +12,9 @@ interface Task {
   templateUrl: './todo.component.html',
 })
 export class TodoComponent {
-  tasks: Task[] = [];
+  tasks: Array<Task> = [];
   newTask = '';
+  ola = '';
 
   addTask() {
     if (!this.newTask.trim()) return;
@@ -21,7 +22,7 @@ export class TodoComponent {
     this.newTask = '';
   }
 
-  removeTask(taskToRemove: Task) {
+  removeTask(taskToRemove: Task): void {
     this.tasks = this.tasks.filter(task => task !== taskToRemove);
   }
 }
