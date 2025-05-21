@@ -16,7 +16,7 @@ export class TodoComponent {
   newTask = '';
   ola = '';
 
-  addTask() {
+  addTask(): void {
     if (!this.newTask.trim()) return;
     this.tasks.push({ title: this.newTask.trim(), completed: false });
     this.newTask = '';
