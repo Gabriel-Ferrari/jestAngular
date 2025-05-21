@@ -9,7 +9,7 @@ test.describe('TodoComponent', () => {
   test('deve adicionar uma nova tarefa', async ({ page }) => {
     await page.fill('input[placeholder="Nova tarefa"]', 'Minha tarefa');
     await page.click('button:has-text("Adicionar")');
-    await expect(page.locator('li')).toContainText('Minha tarefa2');
+    await expect(page.locator('li')).toContainText('Minha tarefa');
   });
 
   test('deve marcar uma tarefa como concluída', async ({ page }) => {
