@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  push:            # Push em qualquer branch
+  push:
     branches: ["**"]
-  pull_request:    # PRs abertas contra a branch master
+  pull_request:
     branches: [master]
 
 jobs:
@@ -19,17 +19,33 @@ jobs:
         with:
           node-version: 22
 
+      - name: 📦 Cache npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: 📦 Install dependencies
         run: npm ci
+
+      - name: 📦 Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright
+          restore-keys: |
+            ${{ runner.os }}-playwright
+
+      - name: Install Playwright Browsers (1x só!)
+        run: npx playwright install --with-deps
 
       - name: 🔍 Run Lint
         run: npm run lint
 
       - name: 🧪 Run Jest Unit Tests
         run: npm run test:ci
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
 
       - name: 🧪 Run Playwright E2E Tests
         run: npm run test:e2e:ci
